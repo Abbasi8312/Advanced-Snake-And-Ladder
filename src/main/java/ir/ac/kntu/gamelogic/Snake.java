@@ -7,7 +7,8 @@ public class Snake extends GameObject {
 
     protected Point head;
 
-    public Snake() {
+    public Snake(int index) {
+        super(index);
         tail = new Point();
         head = new Point();
     }

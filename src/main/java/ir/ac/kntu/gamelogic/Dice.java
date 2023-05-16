@@ -1,6 +1,10 @@
 package ir.ac.kntu.gamelogic;
 
 public final class Dice extends GameObject {
+    public Dice(int index) {
+        super(index);
+    }
+
     public static DiceOptions roll() {
         DiceOptions[] diceOptions = DiceOptions.values();
         return diceOptions[RandomHelper.nextInt(diceOptions.length)];

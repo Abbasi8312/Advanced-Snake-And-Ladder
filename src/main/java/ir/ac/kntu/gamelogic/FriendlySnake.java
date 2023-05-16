@@ -1,6 +1,10 @@
 package ir.ac.kntu.gamelogic;
 
-public class FriendlySnake extends Snake{
+public class FriendlySnake extends Snake {
+    public FriendlySnake(int index) {
+        super(index);
+    }
+
     @Override public void updateTail(GameObject[][] grid) {
         int row;
         int column;
