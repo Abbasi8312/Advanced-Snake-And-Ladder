@@ -1,6 +1,20 @@
 package ir.ac.kntu.gamelogic;
 
-public class Dice extends GameObject {
-    enum DiceOptions {
+public final class Dice extends GameObject {
+    public static DiceOptions roll() {
+        DiceOptions[] diceOptions = DiceOptions.values();
+        return diceOptions[RandomHelper.nextInt(diceOptions.length)];
+    }
+
+    public enum DiceOptions {
+        ONE_UP,
+        TWO_UP,
+        ONE_RIGHT,
+        TWO_RIGHT,
+        ONE_DOWN,
+        TWO_DOWN,
+        ONE_LEFT,
+        TWO_LEFT,
+        EXTRA_LIFE
     }
 }
