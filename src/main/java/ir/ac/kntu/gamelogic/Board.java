@@ -33,12 +33,8 @@ public class Board {
 
     public void fillGrid() {
         grid[0][0] = new Player();
-        updateRegularHeads();
-        updateWildHeads();
-        updateFriendlyHeads();
-        updateRegularTails();
-        updateWildTails();
-        updateFriendlyTails();
+        updateAllHeads();
+        updateAllTails();
     }
 
     public void updateRegularHeads() {
@@ -74,6 +70,28 @@ public class Board {
     public void updateFriendlyTails() {
         for (Snake snake : friendlySnakes) {
             snake.updateTail(grid);
+        }
+    }
+
+    public void updateAllHeads() {
+        updateRegularHeads();
+        updateWildHeads();
+        updateFriendlyHeads();
+    }
+
+    public void updateAllTails() {
+        updateRegularTails();
+        updateWildTails();
+        updateFriendlyTails();
+    }
+
+    public void removeWildHeads() {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (grid[i][j].getClass() == WildSnake.class) {
+                    grid[i][j] = null;
+                }
+            }
         }
     }
 }

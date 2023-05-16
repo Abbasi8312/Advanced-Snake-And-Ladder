@@ -6,6 +6,12 @@ public final class Dice extends GameObject {
         return diceOptions[RandomHelper.nextInt(diceOptions.length)];
     }
 
+    public static void nextTurn(Board board) {
+        board.removeWildHeads();
+        board.updateWildHeads();
+        board.updateAllTails();
+    }
+
     public enum DiceOptions {
         ONE_UP,
         TWO_UP,

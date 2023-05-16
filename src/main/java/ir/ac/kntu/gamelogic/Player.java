@@ -1,4 +1,4 @@
 package ir.ac.kntu.gamelogic;
 
-public class Player extends GameObject{
+public class Player extends GameObject {
 }
