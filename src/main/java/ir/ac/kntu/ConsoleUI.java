@@ -1,13 +1,22 @@
 package ir.ac.kntu;
 
 import ir.ac.kntu.gamelogic.Board;
+import ir.ac.kntu.gamelogic.Dice;
+
+import java.util.Scanner;
 
 public class ConsoleUI {
     private Board board;
 
     public void startGame() {
         board = new Board(10, 10, 20);
-        printBoard(board);
+        Scanner scanner = new Scanner(System.in);
+        String input;
+        do {
+            printBoard(board);
+            input = scanner.nextLine();
+            Dice.nextTurn(board);
+        } while (input.equals(""));
     }
 
     public void printBoard(Board board) {

@@ -112,12 +112,8 @@ public class Board {
     }
 
     public void removeWildHeads() {
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[i].length; j++) {
-                if (grid[i][j].getClass() == WildSnake.class) {
-                    grid[i][j] = null;
-                }
-            }
+        for (WildSnake wildSnake : wildSnakes) {
+            grid[wildSnake.getHead().x][wildSnake.getHead().y] = null;
         }
     }
 

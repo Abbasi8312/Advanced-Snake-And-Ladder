@@ -21,6 +21,10 @@ public class Snake extends GameObject {
         this.tail = tail;
     }
 
+    public Point getHead() {
+        return head;
+    }
+
     public void updateHead(GameObject[][] grid) {
         int row;
         int column;
