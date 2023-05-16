@@ -51,6 +51,11 @@ public class Snake extends GameObject {
         tail.y = column;
     }
 
+    public void bite(Player player, GameObject[][] grid) {
+        player.moveTo(tail);
+        grid[tail.x][tail.y] = player;
+    }
+
     @Override public String toString() {
         return this.getClass().toString() + "///" + head.x + ":" + head.y + " - " + tail.x + ":" + tail.y;
     }

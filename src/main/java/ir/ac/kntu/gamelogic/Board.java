@@ -13,6 +13,8 @@ public class Board {
 
     private final int columnCount;
 
+    private Player player;
+
     public Board(int row, int column, int snakeCount) {
         rowCount = row;
         columnCount = column;
@@ -58,7 +60,8 @@ public class Board {
     }
 
     public void fillGrid() {
-        grid[0][0] = new Player(0);
+        player = new Player(0);
+        grid[0][0] = player;
         updateAllHeads();
         updateAllTails();
     }
@@ -117,11 +120,19 @@ public class Board {
         }
     }
 
+    public void movePlayer(DiceOptions diceOption) {
+        player.move(diceOption, grid);
+    }
+
     public int getRowCount() {
         return rowCount;
     }
 
     public int getColumnCount() {
         return columnCount;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }

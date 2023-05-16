@@ -15,7 +15,7 @@ public class ConsoleUI {
         do {
             printBoard(board);
             input = scanner.nextLine();
-            Dice.nextTurn(board);
+            System.out.println(Dice.nextTurn(board));
         } while (input.equals(""));
     }
 

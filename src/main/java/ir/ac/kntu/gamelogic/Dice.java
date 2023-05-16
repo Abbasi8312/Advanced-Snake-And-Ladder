@@ -10,21 +10,12 @@ public final class Dice extends GameObject {
         return diceOptions[RandomHelper.nextInt(diceOptions.length)];
     }
 
-    public static void nextTurn(Board board) {
+    public static DiceOptions nextTurn(Board board) {
+        DiceOptions diceOption = roll();
+        board.movePlayer(diceOption);
         board.removeWildHeads();
         board.updateWildHeads();
         board.updateAllTails();
-    }
-
-    public enum DiceOptions {
-        ONE_UP,
-        TWO_UP,
-        ONE_RIGHT,
-        TWO_RIGHT,
-        ONE_DOWN,
-        TWO_DOWN,
-        ONE_LEFT,
-        TWO_LEFT,
-        EXTRA_LIFE
+        return diceOption;
     }
 }
