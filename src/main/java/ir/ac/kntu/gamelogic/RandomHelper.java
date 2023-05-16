@@ -7,10 +7,9 @@ import java.util.Random;
  */
 public final class RandomHelper {
 
-    private static final Random RANDOM_GENERATOR = new Random(300);
+    private static final Random RANDOM_GENERATOR = new Random();
 
     private RandomHelper() {
-
     }
 
     public static double nextDouble() {

@@ -1,43 +1,79 @@
 package ir.ac.kntu.gamelogic;
 
 public class Board {
-    private GameObject[][] grid;
+    private final GameObject[][] grid;
 
-    private Snake[] snakes;
+    private final RegularSnake[] regularSnakes;
+
+    private final FriendlySnake[] friendlySnakes;
+
+    private final WildSnake[] wildSnakes;
+
 
     public Board(int row, int column, int snakeCount) {
         grid = new GameObject[row][column];
-        snakes = new Snake[snakeCount];
-        int regularSnakeCount = RandomHelper.nextInt(snakeCount);
-        int wildSnakeCount = RandomHelper.nextInt(snakeCount - regularSnakeCount);
-        int friendlySnakeCount = snakeCount - regularSnakeCount - wildSnakeCount;
-        for (int i = 0; i < regularSnakeCount; i++) {
-            snakes[i] = new RegularSnake();
+        regularSnakes = new RegularSnake[RandomHelper.nextInt(snakeCount)];
+        wildSnakes = new WildSnake[RandomHelper.nextInt(snakeCount - regularSnakes.length)];
+        friendlySnakes = new FriendlySnake[snakeCount - regularSnakes.length - wildSnakes.length];
+        for (int i = 0; i < regularSnakes.length; i++) {
+            regularSnakes[i] = new RegularSnake();
         }
-        for (int i = 0; i < wildSnakeCount; i++) {
-            snakes[i + regularSnakeCount] = new WildSnake();
+        for (int i = 0; i < wildSnakes.length; i++) {
+            wildSnakes[i] = new WildSnake();
         }
-        for (int i = 0; i < friendlySnakeCount; i++) {
-            snakes[i + regularSnakeCount + wildSnakeCount] = new FriendlySnake();
+        for (int i = 0; i < friendlySnakes.length; i++) {
+            friendlySnakes[i] = new FriendlySnake();
         }
         fillGrid();
-        int x = 3;
     }
 
     public Board(int n, int snakeCount) {
-        grid = new GameObject[n][n];
-        fillGrid();
+        this(n, n, snakeCount);
     }
 
-    private void fillGrid() {
+    public void fillGrid() {
         grid[0][0] = new Player();
-        int i = 0;
-        while (i < snakes.length) {
-            int index = RandomHelper.nextInt(grid.length * grid[0].length);
-            if (grid[index / grid[0].length][index % grid[0].length] == null) {
-                grid[index / grid[0].length][index % grid[0].length] = snakes[i];
-                i++;
-            }
+        updateRegularHeads();
+        updateWildHeads();
+        updateFriendlyHeads();
+        updateRegularTails();
+        updateWildTails();
+        updateFriendlyTails();
+    }
+
+    public void updateRegularHeads() {
+        for (Snake snake : regularSnakes) {
+            snake.updateHead(grid);
+        }
+    }
+
+    public void updateWildHeads() {
+        for (Snake snake : wildSnakes) {
+            snake.updateHead(grid);
+        }
+    }
+
+    public void updateFriendlyHeads() {
+        for (Snake snake : friendlySnakes) {
+            snake.updateHead(grid);
+        }
+    }
+
+    public void updateRegularTails() {
+        for (Snake snake : regularSnakes) {
+            snake.updateTail(grid);
+        }
+    }
+
+    public void updateWildTails() {
+        for (Snake snake : wildSnakes) {
+            snake.updateTail(grid);
+        }
+    }
+
+    public void updateFriendlyTails() {
+        for (Snake snake : friendlySnakes) {
+            snake.updateTail(grid);
         }
     }
 }
