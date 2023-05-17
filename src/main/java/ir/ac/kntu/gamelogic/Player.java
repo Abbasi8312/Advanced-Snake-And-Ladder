@@ -10,7 +10,7 @@ public class Player extends GameObject {
 
     public Player(int index) {
         super(index);
-        life = 0;
+        life = 3;
         location = new Point(0, 0);
     }
 

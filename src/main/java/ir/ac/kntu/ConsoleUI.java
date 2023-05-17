@@ -10,7 +10,7 @@ public class ConsoleUI {
     private Board board;
 
     public void printBoard() {
-        String[][] grid = board.getGrid();
+        StringBuilder[][] grid = board.getGrid();
         for (int i = board.getRowCount() - 1; i >= 0; i--) {
             System.out.print("|");
             for (int j = 0; j < board.getColumnCount(); j++) {
@@ -33,7 +33,7 @@ public class ConsoleUI {
     }
 
     public void startGame() {
-        board = new Board(3, 3, 3);
+        board = new Board(10, 10, 20);
         Scanner scanner = new Scanner(System.in);
         String input;
         do {
@@ -41,9 +41,13 @@ public class ConsoleUI {
             printBoard();
             input = scanner.nextLine();
             Dice.nextTurn(board);
+            if (!input.equals("")) {
+                System.out.println("Exiting...");
+                break;
+            }
             System.out.println("Dice: " + Dice.getLastRoll());
             System.out.println();
-            System.out.println(board.getPlayer().getLocation());
+            //System.out.println(board.getPlayer().getLocation());
             if (board.getGameStatus().getStatus() == GameStatus.Status.LOSE) {
                 loseGame();
                 break;
@@ -51,6 +55,6 @@ public class ConsoleUI {
                 winGame();
                 break;
             }
-        } while (input.equals(""));
+        } while (true);
     }
 }

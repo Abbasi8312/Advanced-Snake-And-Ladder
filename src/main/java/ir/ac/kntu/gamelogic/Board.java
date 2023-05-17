@@ -13,9 +13,9 @@ public class Board {
 
     private final int columnCount;
 
-    private Player player;
-
     private final GameStatus gameStatus;
+
+    private Player player;
 
     public Board(int row, int column, int snakeCount) {
         rowCount = row;
@@ -42,21 +42,41 @@ public class Board {
         this(n, n, snakeCount);
     }
 
-    public String[][] getGrid() {
-        String[][] board = new String[rowCount][columnCount];
+    public StringBuilder[][] getGrid() {
+        StringBuilder[][] board = new StringBuilder[rowCount][columnCount];
         for (int i = 0; i < rowCount; i++) {
             for (int j = 0; j < columnCount; j++) {
-                if (grid[i][j] == null) {
-                    board[i][j] = "  ";
-                } else if (grid[i][j].getClass() == Player.class) {
-                    board[i][j] = "P" + grid[i][j].getIndex();
-                } else if (grid[i][j].getClass() == RegularSnake.class) {
-                    board[i][j] = "s" + grid[i][j].getIndex();
-                } else if (grid[i][j].getClass() == WildSnake.class) {
-                    board[i][j] = "S" + grid[i][j].getIndex();
-                } else if (grid[i][j].getClass() == FriendlySnake.class) {
-                    board[i][j] = "l" + grid[i][j].getIndex();
-                }
+                board[i][j] = new StringBuilder();
+            }
+        }
+        board[player.getLocation().x][player.getLocation().y].append("P").append(player.getIndex());
+        for (RegularSnake regularSnake : regularSnakes) {
+            board[regularSnake.head.x][regularSnake.head.y].append("s").append(regularSnake.index);
+        }
+        for (WildSnake wildSnake : wildSnakes) {
+            board[wildSnake.head.x][wildSnake.head.y].append("S").append(wildSnake.index);
+        }
+        for (FriendlySnake friendlySnake : friendlySnakes) {
+            board[friendlySnake.head.x][friendlySnake.head.y].append("l").append(friendlySnake.index);
+        }
+        for (RegularSnake regularSnake : regularSnakes) {
+            board[regularSnake.tail.x][regularSnake.tail.y].append("d").append(regularSnake.index);
+        }
+        for (WildSnake wildSnake : wildSnakes) {
+            board[wildSnake.tail.x][wildSnake.tail.y].append("D").append(wildSnake.index);
+        }
+        for (FriendlySnake friendlySnake : friendlySnakes) {
+            board[friendlySnake.tail.x][friendlySnake.tail.y].append("r").append(friendlySnake.index);
+        }
+        int maxSize = 0;
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < columnCount; j++) {
+                maxSize = Math.max(board[i][j].length(), maxSize);
+            }
+        }
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < columnCount; j++) {
+                board[i][j].append(" ".repeat(maxSize - board[i][j].length()));
             }
         }
         return board;
