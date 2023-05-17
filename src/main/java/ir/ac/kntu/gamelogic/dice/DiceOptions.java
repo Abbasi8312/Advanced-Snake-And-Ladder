@@ -1,4 +1,4 @@
-package ir.ac.kntu.gamelogic;
+package ir.ac.kntu.gamelogic.dice;
 
 public enum DiceOptions {
     ONE_UP,

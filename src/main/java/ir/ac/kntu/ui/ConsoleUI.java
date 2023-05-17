@@ -1,8 +1,8 @@
-package ir.ac.kntu;
+package ir.ac.kntu.ui;
 
-import ir.ac.kntu.gamelogic.Board;
-import ir.ac.kntu.gamelogic.Dice;
-import ir.ac.kntu.gamelogic.GameStatus;
+import ir.ac.kntu.gamelogic.board.Board;
+import ir.ac.kntu.gamelogic.board.GameStatus;
+import ir.ac.kntu.gamelogic.dice.Dice;
 
 import java.util.Scanner;
 

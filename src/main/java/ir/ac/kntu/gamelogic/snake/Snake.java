@@ -1,4 +1,8 @@
-package ir.ac.kntu.gamelogic;
+package ir.ac.kntu.gamelogic.snake;
+
+import ir.ac.kntu.gamelogic.GameObject;
+import ir.ac.kntu.gamelogic.player.Player;
+import ir.ac.kntu.gamelogic.utility.RandomHelper;
 
 import java.awt.*;
 
@@ -15,10 +19,6 @@ public class Snake extends GameObject {
 
     public Point getTail() {
         return tail;
-    }
-
-    public void setTail(Point tail) {
-        this.tail = tail;
     }
 
     public Point getHead() {

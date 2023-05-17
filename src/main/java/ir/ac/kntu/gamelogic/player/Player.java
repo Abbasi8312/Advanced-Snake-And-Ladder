@@ -1,4 +1,8 @@
-package ir.ac.kntu.gamelogic;
+package ir.ac.kntu.gamelogic.player;
+
+import ir.ac.kntu.gamelogic.GameObject;
+import ir.ac.kntu.gamelogic.dice.DiceOptions;
+import ir.ac.kntu.gamelogic.snake.Snake;
 
 import java.awt.*;
 
@@ -70,10 +74,6 @@ public class Player extends GameObject {
 
     public Point getLocation() {
         return location;
-    }
-
-    public void setLocation(Point location) {
-        this.location = location;
     }
 
     public int getLife() {

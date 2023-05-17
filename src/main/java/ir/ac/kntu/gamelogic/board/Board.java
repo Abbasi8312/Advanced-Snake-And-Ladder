@@ -1,4 +1,13 @@
-package ir.ac.kntu.gamelogic;
+package ir.ac.kntu.gamelogic.board;
+
+import ir.ac.kntu.gamelogic.GameObject;
+import ir.ac.kntu.gamelogic.dice.DiceOptions;
+import ir.ac.kntu.gamelogic.player.Player;
+import ir.ac.kntu.gamelogic.snake.FriendlySnake;
+import ir.ac.kntu.gamelogic.snake.RegularSnake;
+import ir.ac.kntu.gamelogic.snake.Snake;
+import ir.ac.kntu.gamelogic.snake.WildSnake;
+import ir.ac.kntu.gamelogic.utility.RandomHelper;
 
 public class Board {
     private final GameObject[][] grid;
@@ -61,22 +70,22 @@ public class Board {
         }
         board[player.getLocation().x][player.getLocation().y].append("P").append(player.getIndex());
         for (RegularSnake regularSnake : regularSnakes) {
-            board[regularSnake.head.x][regularSnake.head.y].append("s").append(regularSnake.index);
+            board[regularSnake.getHead().x][regularSnake.getHead().y].append("s").append(regularSnake.getIndex());
         }
         for (WildSnake wildSnake : wildSnakes) {
-            board[wildSnake.head.x][wildSnake.head.y].append("S").append(wildSnake.index);
+            board[wildSnake.getHead().x][wildSnake.getHead().y].append("S").append(wildSnake.getIndex());
         }
         for (FriendlySnake friendlySnake : friendlySnakes) {
-            board[friendlySnake.head.x][friendlySnake.head.y].append("l").append(friendlySnake.index);
+            board[friendlySnake.getHead().x][friendlySnake.getHead().y].append("l").append(friendlySnake.getIndex());
         }
         for (RegularSnake regularSnake : regularSnakes) {
-            board[regularSnake.tail.x][regularSnake.tail.y].append("d").append(regularSnake.index);
+            board[regularSnake.getTail().x][regularSnake.getTail().y].append("d").append(regularSnake.getIndex());
         }
         for (WildSnake wildSnake : wildSnakes) {
-            board[wildSnake.tail.x][wildSnake.tail.y].append("D").append(wildSnake.index);
+            board[wildSnake.getTail().x][wildSnake.getTail().y].append("D").append(wildSnake.getIndex());
         }
         for (FriendlySnake friendlySnake : friendlySnakes) {
-            board[friendlySnake.tail.x][friendlySnake.tail.y].append("r").append(friendlySnake.index);
+            board[friendlySnake.getTail().x][friendlySnake.getTail().y].append("r").append(friendlySnake.getIndex());
         }
         int maxSize = 0;
         for (int i = 0; i < rowCount; i++) {
