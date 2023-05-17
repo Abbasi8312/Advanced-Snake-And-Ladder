@@ -26,12 +26,18 @@ public class Board {
         }
         if (snakeCount == 0) {
             snakeCount = 1 + RandomHelper.nextInt(rowCount * columnCount / 2 - 1);
+        } else if (snakeCount >= rowCount * columnCount / 2 - 1) {
+            snakeCount = rowCount * columnCount / 2 - 1;
         }
         this.rowCount = rowCount;
         this.columnCount = columnCount;
         grid = new GameObject[rowCount][columnCount];
         regularSnakes = new RegularSnake[RandomHelper.nextInt(snakeCount)];
-        wildSnakes = new WildSnake[RandomHelper.nextInt(snakeCount - regularSnakes.length)];
+        if (snakeCount - regularSnakes.length == 0) {
+            wildSnakes = new WildSnake[0];
+        } else {
+            wildSnakes = new WildSnake[RandomHelper.nextInt(snakeCount - regularSnakes.length)];
+        }
         friendlySnakes = new FriendlySnake[snakeCount - regularSnakes.length - wildSnakes.length];
         for (int i = 0; i < regularSnakes.length; i++) {
             regularSnakes[i] = new RegularSnake(i);

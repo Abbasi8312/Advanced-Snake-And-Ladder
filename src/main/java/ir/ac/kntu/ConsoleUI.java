@@ -55,7 +55,8 @@ public class ConsoleUI {
             column = scanner.nextLine();
         } while (!column.matches("^[0-9]+$"));
         do {
-            System.out.println("Enter snake count or 0 to randomize it");
+            System.out.println(
+                    "Enter snake count or 0 to randomize it (Maximum count is: row count * column count / 2 - 1)");
             snakeCount = scanner.nextLine();
         } while (!snakeCount.matches("^[0-9]+$"));
         board = new Board(Integer.parseInt(row), Integer.parseInt(column), Integer.parseInt(snakeCount));

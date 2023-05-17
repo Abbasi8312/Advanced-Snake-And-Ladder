@@ -34,10 +34,22 @@ public class Snake extends GameObject {
             if (getClass() != FriendlySnake.class) {
                 row++;
             }
-        } while (grid[row][column] != null || row == grid.length - 1 && column == grid[0].length - 1);
+        } while (grid[row][column] != null || row == grid.length - 1 && column == grid[0].length - 1 ||
+                !checkTailAvailability(row, grid));
         grid[row][column] = this;
         head.x = row;
         head.y = column;
+    }
+
+    public boolean checkTailAvailability(int row, GameObject[][] grid) {
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (grid[i][j] == null || grid[i][j].getClass() == Player.class) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public void updateTail(GameObject[][] grid) {
