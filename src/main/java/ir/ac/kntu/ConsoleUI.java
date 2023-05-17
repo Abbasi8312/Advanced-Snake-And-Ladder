@@ -13,8 +13,18 @@ public class ConsoleUI {
         StringBuilder[][] grid = board.getGrid();
         for (int i = board.getRowCount() - 1; i >= 0; i--) {
             System.out.print("|");
+            if (i == 0) {
+                System.out.print("*");
+            }
             for (int j = 0; j < board.getColumnCount(); j++) {
-                System.out.print(grid[i][j] + "|");
+                if (i == board.getRowCount() - 1 && j == board.getColumnCount() - 1) {
+                    System.out.print("$");
+                }
+                System.out.print(grid[i][j]);
+                if ((i != board.getRowCount() - 1 || j != board.getColumnCount() - 1) && (i != 0 || j != 0)) {
+                    System.out.print(" ");
+                }
+                System.out.print("|");
             }
             System.out.println();
         }
@@ -29,7 +39,6 @@ public class ConsoleUI {
     public void loseGame() {
         System.out.println("You lost");
         System.out.println();
-        printBoard();
     }
 
     public void startGame() {
