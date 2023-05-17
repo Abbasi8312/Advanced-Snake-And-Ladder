@@ -42,15 +42,31 @@ public class ConsoleUI {
     }
 
     public void startGame() {
-        board = new Board(10, 10, 20);
         Scanner scanner = new Scanner(System.in);
+        String row;
+        String column;
+        String snakeCount;
+        do {
+            System.out.println("Enter row count or 0 to randomize it");
+            row = scanner.nextLine();
+        } while (!row.matches("^[0-9]+$"));
+        do {
+            System.out.println("Enter column count or 0 to randomize it");
+            column = scanner.nextLine();
+        } while (!column.matches("^[0-9]+$"));
+        do {
+            System.out.println("Enter snake count or 0 to randomize it");
+            snakeCount = scanner.nextLine();
+        } while (!snakeCount.matches("^[0-9]+$"));
+        board = new Board(Integer.parseInt(row), Integer.parseInt(column), Integer.parseInt(snakeCount));
         String input;
+        System.out.println("Enter q to exit");
         do {
             System.out.println("Life: " + board.getPlayer().getLife());
             printBoard();
             input = scanner.nextLine();
             Dice.nextTurn(board);
-            if (!input.equals("")) {
+            if (input.equals("q") || input.equals("Q")) {
                 System.out.println("Exiting...");
                 break;
             }

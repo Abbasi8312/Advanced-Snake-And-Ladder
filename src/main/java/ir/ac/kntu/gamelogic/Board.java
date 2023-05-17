@@ -17,10 +17,19 @@ public class Board {
 
     private Player player;
 
-    public Board(int row, int column, int snakeCount) {
-        rowCount = row;
-        columnCount = column;
-        grid = new GameObject[row][column];
+    public Board(int rowCount, int columnCount, int snakeCount) {
+        if (rowCount == 0) {
+            rowCount = 2 + RandomHelper.nextInt(10);
+        }
+        if (columnCount == 0) {
+            columnCount = 2 + RandomHelper.nextInt(10);
+        }
+        if (snakeCount == 0) {
+            snakeCount = 1 + RandomHelper.nextInt(rowCount * columnCount / 2 - 1);
+        }
+        this.rowCount = rowCount;
+        this.columnCount = columnCount;
+        grid = new GameObject[rowCount][columnCount];
         regularSnakes = new RegularSnake[RandomHelper.nextInt(snakeCount)];
         wildSnakes = new WildSnake[RandomHelper.nextInt(snakeCount - regularSnakes.length)];
         friendlySnakes = new FriendlySnake[snakeCount - regularSnakes.length - wildSnakes.length];
@@ -35,11 +44,6 @@ public class Board {
         }
         fillGrid();
         gameStatus = new GameStatus(this);
-    }
-
-
-    public Board(int n, int snakeCount) {
-        this(n, n, snakeCount);
     }
 
     public StringBuilder[][] getGrid() {
