@@ -11,6 +11,7 @@ public class ConsoleUI {
 
     public void printBoard() {
         StringBuilder[][] grid = board.getGrid();
+        System.out.println("-".repeat((grid[0][0].length() + 2) * grid[0].length + 1));
         for (int i = board.getRowCount() - 1; i >= 0; i--) {
             System.out.print("|");
             if (i == 0) {
@@ -27,17 +28,18 @@ public class ConsoleUI {
                 System.out.print("|");
             }
             System.out.println();
+            System.out.println("-".repeat((grid[0][0].length() + 2) * grid[0].length + 1));
         }
     }
 
     public void winGame() {
-        System.out.println("You won");
+        System.out.println("\u001B[32m" + "You won" + "\u001B[0m");
         System.out.println();
         printBoard();
     }
 
     public void loseGame() {
-        System.out.println("You lost");
+        System.out.println("\u001B[31m" + "You lost" + "\u001B[0m");
         System.out.println();
     }
 
@@ -47,23 +49,24 @@ public class ConsoleUI {
         String column;
         String snakeCount;
         do {
-            System.out.println("Enter row count or 0 to randomize it");
+            System.out.println("\u001B[33m" + "Enter row count or 0 to randomize it" + "\u001B[0m");
             row = scanner.nextLine();
         } while (!row.matches("^[0-9]+$"));
         do {
-            System.out.println("Enter column count or 0 to randomize it");
+            System.out.println("\u001B[33m" + "Enter column count or 0 to randomize it" + "\u001B[0m");
             column = scanner.nextLine();
         } while (!column.matches("^[0-9]+$"));
         do {
-            System.out.println(
-                    "Enter snake count or 0 to randomize it (Maximum count is: row count * column count / 2 - 1)");
+            System.out.println("\u001B[33m" +
+                    "Enter snake count or 0 to randomize it (Maximum count is: row count * column count / 2 - 1)" +
+                    "\u001B[0m");
             snakeCount = scanner.nextLine();
         } while (!snakeCount.matches("^[0-9]+$"));
         board = new Board(Integer.parseInt(row), Integer.parseInt(column), Integer.parseInt(snakeCount));
         String input;
-        System.out.println("Enter q to exit");
+        System.out.println("\u001B[31m" + "Enter q to exit" + "\u001B[0m");
         do {
-            System.out.println("Life: " + board.getPlayer().getLife());
+            System.out.println("\u001B[35m" + "Health: " + board.getPlayer().getLife() + "\u001B[0m");
             printBoard();
             input = scanner.nextLine();
             Dice.nextTurn(board);
@@ -71,7 +74,7 @@ public class ConsoleUI {
                 System.out.println("Exiting...");
                 break;
             }
-            System.out.println("Dice: " + Dice.getLastRoll());
+            System.out.println("\u001B[34m" + "Dice: " + Dice.getLastRoll() + "\u001B[0m");
             System.out.println();
             //System.out.println(board.getPlayer().getLocation());
             if (board.getGameStatus().getStatus() == GameStatus.Status.LOSE) {
