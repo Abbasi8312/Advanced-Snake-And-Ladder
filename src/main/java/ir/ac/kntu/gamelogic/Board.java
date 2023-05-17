@@ -143,8 +143,8 @@ public class Board {
         }
     }
 
-    public void movePlayer(DiceOptions diceOption) {
-        player.nextTurn(diceOption, grid);
+    public boolean nextTurn(DiceOptions diceOption) {
+        return player.nextTurn(diceOption, grid);
     }
 
     public int getRowCount() {

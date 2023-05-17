@@ -15,11 +15,12 @@ public final class Dice extends GameObject {
 
     public static void nextTurn(Board board) {
         DiceOptions diceOption = roll();
-        board.movePlayer(diceOption);
-        board.removeWildHeads();
-        board.updateWildHeads();
-        board.updateAllTails();
-        board.getGameStatus().updateStatus();
+        if (board.nextTurn(diceOption)) {
+            board.removeWildHeads();
+            board.updateWildHeads();
+            board.updateAllTails();
+            board.getGameStatus().updateStatus();
+        }
     }
 
     public static DiceOptions getLastRoll() {

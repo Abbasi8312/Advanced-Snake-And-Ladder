@@ -18,7 +18,7 @@ public class Player extends GameObject {
         return index;
     }
 
-    public void nextTurn(DiceOptions diceOption, GameObject[][] grid) {
+    public boolean nextTurn(DiceOptions diceOption, GameObject[][] grid) {
         int xOffset = 0;
         int yOffset = 0;
         switch (diceOption) {
@@ -32,20 +32,21 @@ public class Player extends GameObject {
             case TWO_DOWN -> xOffset = -2;
             case EXTRA_LIFE -> {
                 life++;
-                return;
+                return false;
             }
             default -> {
-                return;
+                return false;
             }
         }
         if (location.x + xOffset < 0 || location.x + xOffset >= grid.length || location.y + yOffset < 0 ||
                 location.y + yOffset >= grid[0].length) {
-            return;
+            return false;
         }
         grid[location.x][location.y] = null;
         location.x += xOffset;
         location.y += yOffset;
         move(grid);
+        return true;
     }
 
     public void move(GameObject[][] grid) {
