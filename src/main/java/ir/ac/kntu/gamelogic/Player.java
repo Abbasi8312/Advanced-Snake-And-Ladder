@@ -31,7 +31,9 @@ public class Player extends GameObject {
             case TWO_RIGHT -> yOffset = 2;
             case TWO_DOWN -> xOffset = -2;
             case EXTRA_LIFE -> {
-                life++;
+                if (life < 3) {
+                    life++;
+                }
                 return false;
             }
             default -> {
