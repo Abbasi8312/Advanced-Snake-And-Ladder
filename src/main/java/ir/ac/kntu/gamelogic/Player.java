@@ -10,7 +10,7 @@ public class Player extends GameObject {
 
     public Player(int index) {
         super(index);
-        life = 3;
+        life = 0;
         location = new Point(0, 0);
     }
 
@@ -18,61 +18,40 @@ public class Player extends GameObject {
         return index;
     }
 
-    public void move(DiceOptions diceOption, GameObject[][] grid) {
-        grid[location.x][location.y] = null;
+    public void nextTurn(DiceOptions diceOption, GameObject[][] grid) {
+        int xOffset = 0;
+        int yOffset = 0;
         switch (diceOption) {
-            case ONE_UP -> {
-                if (location.x < grid.length - 1) {
-                    location.x += 1;
-                }
+            case ONE_UP -> xOffset = 1;
+            case ONE_LEFT -> yOffset = -1;
+            case ONE_RIGHT -> yOffset = 1;
+            case ONE_DOWN -> xOffset = -1;
+            case TWO_UP -> xOffset = 2;
+            case TWO_LEFT -> yOffset = -2;
+            case TWO_RIGHT -> yOffset = 2;
+            case TWO_DOWN -> xOffset = -2;
+            case EXTRA_LIFE -> {
+                life++;
+                return;
             }
-            case ONE_LEFT -> {
-                if (location.y > 0) {
-                    location.y -= 1;
-                }
-            }
-            case ONE_RIGHT -> {
-                if (location.y < grid[0].length - 1) {
-                    location.y += 1;
-                }
-            }
-            case ONE_DOWN -> {
-                if (location.x > 0) {
-                    location.x -= 1;
-                }
-            }
-            case TWO_UP -> {
-                if (location.x < grid.length - 2) {
-                    location.x += 2;
-                }
-            }
-            case TWO_LEFT -> {
-                if (location.y > 1) {
-                    location.y -= 2;
-                }
-            }
-            case TWO_RIGHT -> {
-                if (location.y < grid[0].length - 2) {
-                    location.y += 2;
-                }
-            }
-            case TWO_DOWN -> {
-                if (location.x > 1) {
-                    location.x -= 2;
-                }
-            }
-            case EXTRA_LIFE -> life++;
             default -> {
                 return;
             }
         }
-        checkLocation(grid);
+        if (location.x + xOffset < 0 || location.x + xOffset >= grid.length || location.y + yOffset < 0 ||
+                location.y + yOffset >= grid[0].length) {
+            return;
+        }
+        grid[location.x][location.y] = null;
+        location.x += xOffset;
+        location.y += yOffset;
+        move(grid);
     }
 
-    public void checkLocation(GameObject[][] grid) {
+    public void move(GameObject[][] grid) {
         if (grid[location.x][location.y] == null) {
             grid[location.x][location.y] = this;
-        } else {
+        } else if (grid[location.x][location.y].getClass() != Player.class) {
             Snake snake = (Snake) grid[location.x][location.y];
             snake.bite(this, grid);
         }
@@ -92,5 +71,9 @@ public class Player extends GameObject {
 
     public void setLocation(Point location) {
         this.location = location;
+    }
+
+    public int getLife() {
+        return life;
     }
 }

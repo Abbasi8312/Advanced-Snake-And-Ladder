@@ -15,6 +15,8 @@ public class Board {
 
     private Player player;
 
+    private final GameStatus gameStatus;
+
     public Board(int row, int column, int snakeCount) {
         rowCount = row;
         columnCount = column;
@@ -32,6 +34,7 @@ public class Board {
             friendlySnakes[i] = new FriendlySnake(i);
         }
         fillGrid();
+        gameStatus = new GameStatus(this);
     }
 
 
@@ -121,7 +124,7 @@ public class Board {
     }
 
     public void movePlayer(DiceOptions diceOption) {
-        player.move(diceOption, grid);
+        player.nextTurn(diceOption, grid);
     }
 
     public int getRowCount() {
@@ -134,5 +137,9 @@ public class Board {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public GameStatus getGameStatus() {
+        return gameStatus;
     }
 }

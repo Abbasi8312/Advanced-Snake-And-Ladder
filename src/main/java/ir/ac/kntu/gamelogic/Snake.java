@@ -34,7 +34,7 @@ public class Snake extends GameObject {
             if (getClass() != FriendlySnake.class) {
                 row++;
             }
-        } while (grid[row][column] != null);
+        } while (grid[row][column] != null || row == grid.length - 1 && column == grid[0].length - 1);
         grid[row][column] = this;
         head.x = row;
         head.y = column;
